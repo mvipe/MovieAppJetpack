@@ -1,8 +1,10 @@
 package com.learn.movieappjetpack
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -62,17 +64,20 @@ fun MainContent(movieList:List<String> =listOf(
     Column(modifier = Modifier.padding(12.dp)) {
         LazyColumn{
             items(items =movieList){
-                item-> MovieRow(movie = item)
+                item-> MovieRow(movie = item){
+                    movie-> Log.d("MV","Main Content : ${movie}" )
+            }
             }
         }
     }
 }
 
 @Composable
-fun MovieRow(movie:String){
+fun MovieRow(movie:String,onItemClick:(String)->Unit={}){
     Card(modifier = Modifier
         .padding(4.dp)
         .fillMaxWidth()
+        .clickable { onItemClick(movie) }
         .height(130.dp),
     shape = RoundedCornerShape(corner = CornerSize(16.dp)),
     elevation = 6.dp) {
