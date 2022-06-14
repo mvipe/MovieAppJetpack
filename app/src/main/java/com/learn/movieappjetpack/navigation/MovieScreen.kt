@@ -10,7 +10,7 @@ enum class MovieScreen {
         fun fromRoute(route:String?):MovieScreen
         =when (route?.substringBefore("/")){
             HomeScreen.name -> HomeScreen
-            DetailsScreen.name -> DetailsScreen
+            DetailsScreen.name+"/{movie}" -> DetailsScreen
             null -> HomeScreen
             else -> throw IllegalArgumentException("Route:${route} is not found")
         }
