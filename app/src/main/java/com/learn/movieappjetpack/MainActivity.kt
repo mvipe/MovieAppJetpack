@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.learn.movieappjetpack.navigation.MovieNavigation
 import com.learn.movieappjetpack.ui.theme.MovieAppJetpackTheme
 
 class MainActivity : ComponentActivity() {
@@ -27,7 +28,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyApp {
-                MainContent()
+                MovieNavigation()
             }
         }
     }
@@ -36,41 +37,10 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MyApp(content:@Composable () -> Unit){
     MovieAppJetpackTheme {
-       Scaffold(topBar = {
-           TopAppBar(backgroundColor = Color.Magenta, elevation = 5.dp) {
-               Text(text="Movies")
-           }
-       }) {
         content()
-       }
     }
 }
 
-@Composable
-fun MainContent(movieList:List<String> =listOf(
-    "Avatar",
-    "Harry Porter",
-    "Bajrangi Bhaijaan",
-    "KGF",
-    "Bahubali",
-    "RRR",
-    "Ye h jalva",
-    "Kashmeer Files",
-    "Wanted",
-    "Ready",
-    "Kabhi khushi kabhi gam"
-)){
-
-    Column(modifier = Modifier.padding(12.dp)) {
-        LazyColumn{
-            items(items =movieList){
-                item-> MovieRow(movie = item){
-                    movie-> Log.d("MV","Main Content : ${movie}" )
-            }
-            }
-        }
-    }
-}
 
 @Composable
 fun MovieRow(movie:String,onItemClick:(String)->Unit={}){
@@ -104,6 +74,6 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
    MyApp {
-       MainContent()
+       MovieNavigation()
    }
 }
