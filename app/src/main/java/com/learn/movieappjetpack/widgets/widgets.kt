@@ -12,11 +12,16 @@ import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import coil.compose.rememberImagePainter
+import coil.request.ImageRequest
 import coil.transform.CircleCropTransformation
 import com.learn.movieappjetpack.models.Movie
 import com.learn.movieappjetpack.models.getMovies
@@ -33,18 +38,35 @@ fun MovieRow(movie: Movie= getMovies()[0], onItemClick:(String)->Unit={}){
         elevation = 6.dp) {
         Row(verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Start) {
-            Surface(modifier = Modifier
-                .padding(13.dp)
-                .size(100.dp),
-                shape = RectangleShape, elevation = 4.dp) {
-                Image(painter = rememberImagePainter(data = movie.images[0],
-                builder = {
-                    crossfade(true)
-                    transformations(CircleCropTransformation())
-                }), contentDescription = "Movie Posters"
-                        )
-                
-                  }
+            Surface(
+                modifier = Modifier
+                    .padding(13.dp)
+                    .size(100.dp),
+                shape = RectangleShape, elevation = 4.dp
+            ) {
+                AsyncImage(
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(movie.images[0])
+                        .crossfade(true)
+                        .build(),
+
+                    contentDescription = "Poster Image",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.clip(CircleShape)
+                )
+            }
+
+
+
+//                Image(painter = rememberImagePainter(data = movie.images[0],
+//                builder = {
+//                    crossfade(true)
+//                    transformations(CircleCropTransformation())
+//                }), contentDescription = "Movie Posters"
+//                        )
+//
+
+
             Column() {
                 Text(text = movie.title,color= Color.Black
                     , style = MaterialTheme.typography.h5)
