@@ -89,7 +89,7 @@ fun MovieRow(movie: Movie= getMovies()[0], onItemClick:(String)->Unit={}){
                     , style = MaterialTheme.typography.h6)
 
                 AnimatedVisibility(visible = expanded) {
-                    Column() {
+                    Column {
                        Text(buildAnnotatedString {
                            withStyle(style = SpanStyle(
                                color = Color.DarkGray,
@@ -105,7 +105,23 @@ fun MovieRow(movie: Movie= getMovies()[0], onItemClick:(String)->Unit={}){
                            )){
                                append("${movie.plot}")
                            }
-                       })
+                       }, modifier = Modifier.padding(6.dp))
+
+                        Divider()
+                        Text(
+                            text = "Director: ${movie.director}",
+                            style = MaterialTheme.typography.caption
+                        )
+
+                        Text(
+                            text = "Actors: ${movie.actors}",
+                            style = MaterialTheme.typography.caption
+                        )
+
+                        Text(
+                            text = "Rating: ${movie.rating}",
+                            style = MaterialTheme.typography.caption
+                        )
                     }
                 }
 
