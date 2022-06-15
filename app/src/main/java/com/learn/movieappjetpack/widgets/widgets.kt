@@ -36,10 +36,10 @@ import com.learn.movieappjetpack.models.getMovies
 
 @Preview
 @Composable
-fun MovieRow(movie: Movie= getMovies()[0], onItemClick:(String)->Unit={}){
+fun MovieRow(movie: Movie= getMovies()[0], expandedd:Boolean=false,onItemClick:(String)->Unit={}){
 
     var expanded by remember {
-        mutableStateOf(false)
+        mutableStateOf(expandedd)
     }
 
     Card(modifier = Modifier
