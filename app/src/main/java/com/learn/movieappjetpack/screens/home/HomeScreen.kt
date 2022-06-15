@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.learn.movieappjetpack.MovieRow
+
 import com.learn.movieappjetpack.models.Movie
 import com.learn.movieappjetpack.models.getMovies
 import com.learn.movieappjetpack.navigation.MovieScreen
